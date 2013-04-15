@@ -1,4 +1,2 @@
-bash-scripts
-============
-
-my bash's
+#!/bin/bash
+alias l='ls -lah --color=auto'
