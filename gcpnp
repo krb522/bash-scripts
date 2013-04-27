@@ -1,0 +1,52 @@
+#!/bin/bash
+# Arguement order = -m comment -v verbose
+
+usage ()
+{
+cat << EOF
+usage: $0 options
+ 
+This script performs git push 'n pull
+  
+OPTIONS:
+  -h  Help - Show this message
+  -m  Comment for the current commit
+  -v  Verbose
+
+Branch is gathered automatically for the current context.
+EOF
+}
+
+COMMENT=
+BRANCH=`git rev-parse --abbrev-ref HEAD`
+
+while getopts "hm:v" OPTION
+do
+  case $OPTION in
+    h)
+      usage
+      exit 1
+      ;;
+    m)
+      COMMENT=$OPTARG
+      ;;
+    v)
+      VERBOSE=1
+      ;;
+    ?)
+      usage
+      exit 1
+      ;;
+  esac
+done
+
+if [[ -z $COMMENT ]] || [[ -z $BRANCH ]]
+  then
+    usage
+    exit 1
+else
+  git status;
+  git pull origin $BRANCH;
+  git commit -am "$COMMENT";
+  git push origin $BRANCH;
+fi
