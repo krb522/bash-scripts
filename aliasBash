@@ -1,3 +1,5 @@
 #!/bin/bash
 alias l='ls -lah'
 alias gcpnp='bash ~/scriptKitty/bash-scripts/gcpnp'
+(echo 'Now l=ls -lah and l will now show all items in your directory and your permissions for them'
+exit)
